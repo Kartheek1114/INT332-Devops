@@ -36,5 +36,7 @@ less resource usage and faster startup
 basic commands
 
 docker pull ubuntu 
+docker image
+docker run ubuntu
 
 
