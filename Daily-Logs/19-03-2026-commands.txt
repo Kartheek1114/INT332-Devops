@@ -1,0 +1,37 @@
+container interation commands
+
+docker run -dit --name myubuntu ubuntu 
+-d = detached mode
+-i = iterative mode
+-t = terminal mode
+inspect = configuration file of the container
+logs = details related to running container
+
+
+provide by the os all details when we run inspect command
+
+docker stats = to check how much cpu and memory a container contains
+
+VOLUME COMMANDS
+
+docker volume create <name of the volume>
+
+docker inspect <volume-name>
+docker volume ls = list all volumes
+docker volume rm <volume name>
+
+
+NetWORK COMMANDS
+
+
+docker network ls
+docker network crate <network name>
+docker inspect <network-name> 
+
+docker network rm <network name>
+
+
+
+
+
+
