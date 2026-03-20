@@ -1,0 +1,29 @@
+You are a DevOps trainee and need to deploy the Apache HTTP Server (httpd) using Docker for testing a static website. Pull the Apache server image from Docker Hub, create a container named apache-web, and run it in detached mode. Map port 8081 on the host machine to port 80 inside the container so that the website can be accessed through a browser.
+Tasks:
+Pull the Apache (httpd) Docker image.
+Verify that the image is successfully downloaded.
+Run the container with the specified name and port mapping.
+Check the list of running containers.
+Access the Apache web server using a browser.
+ 
+this task execution 
+
+1: docker pull https - this command the pull httpd image
+2: docker images - to check all the image is downloaded or not
+3: docker run -d -p 8081:80 --name appache-web httpd  - this command run the container with the specified port number
+-d - runs in background
+-p = host port number 8081 and container host no is 80 
+--name <container-name>
+4: docker ps - to check all the running container
+
+and check in browser with that port number 
+
+and it says "it works"
+
+now we have to change that text
+
+for that
+1: create a folder
+2: create a .html file in that folder
+3: and run this command docker run -d -p 8081:80 --name apache-web -v "C:\Users\karth\OneDrive\Desktop\my-site:/usr/local/apache2/htdocs/" httpd  
+it will be changed to that text whatever in that html file
