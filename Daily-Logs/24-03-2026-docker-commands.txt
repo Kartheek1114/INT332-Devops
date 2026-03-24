@@ -1,0 +1,39 @@
+1: docker --version
+2: docker info
+3: docker pull httpd = to pull the docker image
+4: docker history httpd = check history of the image
+5: docker images  = list of all images
+6: docker run [options] image  [command][args]
+-d = in the background
+-it = iterative mode
+--name = specify a name for the container
+-rm = to remove the container
+-p = maps a port to a container
+
+docker run httpd echo "text" 
+docker run --name my-cont httpd echo "hello"
+
+
+ENVIRONMENT VARIABLES
+
+env variables are key-value pairs used by applications to:
+
+read configuration 
+store secrets
+control application behavior without changing the image
+
+docker without -e
+configuration must be hard coded in the image
+need to rebuild image for every change
+
+with -e
+
+same image -- different behavior
+secure and flexible configuration
+
+
+
+docker run -e MY_VAR=value https env
+
+docker run -it -e MY_NAME=Kartheek ubuntu bash 
+docker run -it -e MY_NAME=Karthee -e S_NAMe=satish ubuntu bash
