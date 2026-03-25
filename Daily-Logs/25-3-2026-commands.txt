@@ -1,0 +1,19 @@
+-p  stands for publish port
+it maps a port on your host machine to a port inside the container
+
+-p allows users outside the container to access an application running in the container
+
+
+docker run -p<HOST_PORT>:<CONTAINER_PORT> httpd
+
+docker run -d -p 3307:3306 --name mysql-test -e MYSQL_ROOT_PASSWORD=root123 MySQL
+
+docker exec -it mysql-test bash
+
+MySQL -h 127.0.0.1 -p 3306 -u root -p
+docker exec -it 251acc010fd4e4ea517b883700fbb425526658057f8ad617f5389d2de317815e bash/env
+
+
+
+
+
