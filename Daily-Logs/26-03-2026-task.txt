@@ -1,0 +1,6 @@
+run a docker container "DB-app" based on the "mongo" image and expose port 80 and host port 8082 on the container
+
+1: docker pull mongo
+2: docker run -d -p 80:8082 DB-app mongo
+
+
