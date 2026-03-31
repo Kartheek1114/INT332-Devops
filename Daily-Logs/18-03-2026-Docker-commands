@@ -6,5 +6,5 @@ docker logs <containre-id>  shows container output logs
 docker inspect <container-id> display detailed configuration in json format
 docker stats - shows live cpu, memory usage of containers
 docker top <container id> 
-docker run -dit --aame myubuntu ubuntu
+docker run -dit --name myubuntu ubuntu
 docker start ubuntu
