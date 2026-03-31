@@ -1,0 +1,17 @@
+listing and inspecting container
+
+1: docker ps
+2: docker ps -a
+3: docker inspect <container_id>
+
+
+commands for ci with host
+
+1: docker exec -it container id ls
+2: docker exec -it <container id> /bin/bash
+
+3: mkdir data
+4:
+echo "hello" > /data/test.txt
+exit
+docker attach <container id>
