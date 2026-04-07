@@ -1,0 +1,10 @@
+image creation
+
+
+mkdir nginix-app
+cd nginix-app
+notepad index.html
+notepad default.conf
+notepad Dockerfile
+docker build -t nginx-app .
+docker run -d -p 8080:80 nginx-app
