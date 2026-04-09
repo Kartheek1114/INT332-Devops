@@ -1,0 +1,5 @@
+Docker networking
+
+docker network ls
+docker network inspect bridge
+docker network create my_bridge_net
