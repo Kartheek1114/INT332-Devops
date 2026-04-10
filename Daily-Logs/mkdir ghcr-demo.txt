@@ -1,0 +1,10 @@
+mkdir ghcr-demo
+ cd ghcr-demo
+new-Item Dockerfile
+ notepad Dockerfile
+New-Item index.html
+notepad index.html
+ echo pat| docker login ghcr.io -u kartheek1114 --password-stdin
+Login Succeeded
+docker build -t ghcr.io/kartheek1114/ghcr-demo .
+ docker push ghcr.io/kartheek1114/ghcr-demo
