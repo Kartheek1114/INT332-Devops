@@ -1,0 +1,43 @@
+examples of monolithic applications
+
+A monolithic application is one where all components (UI, business logic, data access) are bundled into a single deployable unit. Here are examples across different domains:
+Classic Real-World Examples
+E-commerce platforms
+
+Early versions of Amazon and eBay were monoliths before they migrated to microservices
+Magento (traditional deployment) — the entire storefront, cart, payments, and admin in one codebase
+
+Content Management Systems
+
+WordPress — presentation, plugins, database interactions, and admin all in one PHP application
+Drupal and Joomla follow the same pattern
+
+Enterprise Software
+
+SAP ERP (older versions) — HR, finance, inventory, and logistics tightly coupled in one system
+Oracle E-Business Suite — a large single application handling multiple business functions
+
+Banking & Insurance Core Systems
+
+Legacy core banking systems (e.g., written in COBOL) where account management, transactions, and reporting are one giant system
+
+2 data access layer
+3 data store layer
+adv of monolothic- easy to deploy, easy to test
+disadv of monolothic- cant update easily and if updated entire should be deployed again
+
+microservises
+Microservices Architecture
+Microservices break an application into small, independent services that each handle a specific business function and communicate over APIs (REST, gRPC, message queues).
+Real-World Examples
+Netflix
+
+Hundreds of independent services: recommendations, streaming, billing, search, user profiles
+Each service has its own database and deploys independently
+Migrated from a monolith after a major outage in 2008
+
+Amazon
+
+Each function (cart, payments, product catalog, reviews) is a separate service
+Famous internal mandate: all teams must expose data via APIs only ("Bezos API Mandate")
+
