@@ -1,0 +1,265 @@
+Continuous Integration (CI) with GitHub Actions
+1. Continuous Integration (CI)
+
+Continuous Integration (CI) means developers regularly upload code to a shared repository, and the system automatically checks whether the code works correctly.
+
+Purpose of CI
+Detect errors early
+Automatically run tests
+Improve software quality
+Save developer time
+Avoid integration problems
+Example
+
+A student uploads code to GitHub.
+GitHub Actions automatically:
+
+builds the project
+runs tests
+checks for errors
+
+If something fails, the developer gets notified.
+
+2. GitHub Actions
+
+GitHub Actions is a CI/CD tool inside GitHub used to automate software workflows.
+
+It helps automate:
+
+Testing
+Building
+Deployment
+Code checking
+Notifications
+3. Workflow Automation
+
+Workflow automation means tasks run automatically without manual work.
+
+Example Tasks
+Run Java tests automatically
+Deploy website automatically
+Check coding standards
+Send alerts after build completion
+4. Workflow Directory Structure
+
+GitHub Actions workflows are stored inside:
+
+.github/workflows/
+Example
+project-folder/
+ └── .github/
+      └── workflows/
+           └── ci.yml
+.yml file contains workflow instructions.
+5. Key Components of GitHub Actions
+A) Workflow
+
+A workflow is an automated process.
+
+It is written in YAML format.
+
+Example
+name: Java CI
+B) Jobs
+
+A workflow contains one or more jobs.
+
+Each job performs a task.
+
+Example
+Build job
+Test job
+Deploy job
+jobs:
+  build:
+C) Steps
+
+Each job contains steps.
+
+Steps execute commands one by one.
+
+Example
+steps:
+  - name: Checkout Code
+D) Actions
+
+Actions are reusable code blocks.
+
+GitHub provides many ready-made actions.
+
+Example
+uses: actions/checkout@v4
+
+This downloads repository code.
+
+E) Runners
+
+Runners are machines that execute workflows.
+
+GitHub provides:
+
+Ubuntu
+Windows
+macOS runners
+Example
+runs-on: ubuntu-latest
+6. Workflow Triggers
+
+Triggers decide when workflows should start.
+
+A) Push Trigger
+
+Runs workflow when code is pushed.
+
+on: push
+Example
+
+Whenever a developer uploads new code.
+
+B) Pull Request Trigger
+
+Runs when a pull request is created.
+
+on: pull_request
+
+Used to verify code before merging.
+
+C) Schedule Trigger
+
+Runs automatically at fixed times.
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+Example:
+
+Daily backup
+Nightly testing
+D) Manual Workflow Trigger
+
+Allows user to start workflow manually.
+
+on:
+  workflow_dispatch:
+
+Useful for:
+
+Manual deployments
+Special testing
+7. Jobs & Matrix Strategies
+Jobs
+
+Multiple jobs can run:
+
+sequentially
+parallelly
+Example
+jobs:
+  build:
+  test:
+Matrix Strategy
+
+Matrix strategy runs jobs with multiple configurations.
+
+Example
+
+Test code on:
+
+Java 17
+Java 21
+strategy:
+  matrix:
+    java-version: [17, 21]
+
+Benefits:
+
+Saves time
+Tests compatibility
+8. Steps & Shell Commands
+
+Steps can execute shell commands.
+
+Example
+steps:
+  - run: mvn test
+
+This runs Maven tests.
+
+Common Commands
+Command	Purpose
+mvn test	Run tests
+npm install	Install packages
+npm run build	Build project
+java -version	Check Java version
+9. Using Marketplace Actions
+
+GitHub Marketplace contains reusable actions created by GitHub and developers.
+
+Examples
+Action	Purpose
+actions/checkout	Download repository
+actions/setup-java	Install Java
+actions/setup-node	Install Node.js
+Example
+uses: actions/setup-java@v4
+10. Complete Example Workflow
+name: Java CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+
+      - name: Build Project
+        run: mvn clean install
+11. Advantages of GitHub Actions
+Easy automation
+Integrated with GitHub
+Free for small projects
+Fast testing
+Supports many languages
+Large marketplace support
+Improves code quality
+12. Disadvantages
+YAML syntax can be confusing
+Complex workflows are difficult
+Limited free usage for private repositories
+13. Real-Life Uses
+
+Companies use GitHub Actions for:
+
+Automatic testing
+Continuous deployment
+Docker builds
+Cloud deployment
+Security scanning
+
+Examples include companies like Microsoft, Google, and Netflix.
+
+Quick Revision Cheat Sheet
+Term	Meaning
+CI	Automatically test/integrate code
+Workflow	Automated process
+Job	Group of tasks
+Step	Single command/task
+Action	Reusable automation code
+Runner	Machine running workflow
+Push Trigger	Runs on code upload
+Pull Request Trigger	Runs before merge
+Schedule Trigger	Runs at fixed time
+workflow_dispatch	Manual trigger
+Matrix Strategy	Test multiple configurations
