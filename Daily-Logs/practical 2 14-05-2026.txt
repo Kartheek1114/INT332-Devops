@@ -1,0 +1,73 @@
+practical 2 
+
+
+mkdir multi-container-app
+
+cd multi-container-app
+
+mkdir frontend
+cd frontend
+
+notepad package.json
+
+"name": "frontend-app",
+"version": "1 .O.o•,
+"private": true,
+"scripts": {
+•start": •node server.js"
+"dependencies": {
+•express". "*4.18.2"
+
+notepad server.js
+const express = require(express');
+const app = expressO;
+app.get('/', (req, res) {
+res.send(Frontend Running Successfully);
+app.listen(3000, O {
+console.log(Frontend running on port 3000');
+
+notepad Dockerfile
+
+FROM node:18
+WORKDIR lapp
+COPY package*.json ./
+RUN npm install
+COPY ..
+EXPOSE 3000
+CMD ['npm•, •start"]
+
+ren Dockerfile.txt Dockerfile
+cd ..
+
+mkdir backend
+
+cd backend
+
+notepad pom.xml
+
+
+mkdir src\main\java\com\example
+notepad src\main\java\com\example\Application.java
+notepad Dockerfile
+ren Dockerfile.txt Dockerfile
+
+mvn clean package
+
+notepad docker-compose.yml
+mkdir .github
+mkdir .github\workflows
+
+notepad .github\workflows\ci-cd.yml
+
+docker compose up —build
+
+git init
+git add .
+git commit -m 'Completed multi-container CI/CD project"
+git branch -M main
+
+git remote add origin https://github.com/YOUR_USERNAME/multi-container-app.git
+git push -u origin main
+GitHub repo
+Actions tab
+Multi-container CI/CD Pipeline successful
