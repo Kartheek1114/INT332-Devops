@@ -1,0 +1,443 @@
+
+9. Jenkinsfile Structure
+
+A Jenkins pipeline is usually stored in:
+
+Project Root
+    |
+    |-- Jenkinsfile
+
+Example:
+
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Build') {
+            steps {
+                echo 'Build'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Test'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploy'
+            }
+        }
+    }
+}
+10. Parameters
+
+Parameters allow user input before starting a build.
+
+Example:
+
+parameters {
+    string(
+        name: 'VERSION',
+        defaultValue: '1.0'
+    )
+}
+
+User enters:
+
+VERSION = 2.0
+11. Environment Variables
+
+Used to store values.
+
+Example:
+
+environment {
+    APP_NAME = "BankApp"
+}
+
+Use:
+
+echo "${APP_NAME}"
+12. Jenkins Multi-Branch Pipelines
+
+Automatically creates pipelines for Git branches.
+
+Example:
+
+main
+develop
+feature/login
+feature/payment
+
+Jenkins builds each branch separately.
+
+Benefits:
+
+Branch isolation
+Easy testing
+Better CI process
+13. Pipeline Stages
+Stage 1: Checkout Code
+
+Download code from GitHub.
+
+git 'https://github.com/user/project.git'
+Stage 2: Build
+
+Compile code.
+
+Example:
+
+sh 'mvn clean compile'
+Stage 3: Test
+
+Run tests.
+
+sh 'mvn test'
+Stage 4: Package
+
+Create JAR/WAR file.
+
+sh 'mvn package'
+Stage 5: Deploy
+
+Deploy application.
+
+echo 'Deploying'
+Post Actions
+
+Run after pipeline finishes.
+
+post {
+    success {
+        echo 'Success'
+    }
+
+    failure {
+        echo 'Failed'
+    }
+}
+14. Managing Artifacts
+
+Artifacts are build outputs.
+
+Examples:
+
+JAR files
+WAR files
+ZIP files
+
+Store artifacts:
+
+archiveArtifacts 'target/*.jar'
+
+Benefits:
+
+Backup
+Download later
+Deployment usage
+15. Docker and Jenkins Integration
+
+Jenkins can work directly with Docker.
+
+Build Docker Image
+docker build -t bankapp .
+
+Pipeline:
+
+sh 'docker build -t bankapp .'
+16. Docker Inside Jenkins Agents
+
+Agent machine must have Docker installed.
+
+Jenkins Agent
+      ↓
+Docker Engine
+      ↓
+Build Container
+
+Benefits:
+
+Isolation
+Consistent environment
+17. Using Docker Plugins
+
+Popular plugins:
+
+Docker Plugin
+Docker Pipeline Plugin
+
+Benefits:
+
+Docker management
+Container deployment
+Image building
+18. Publishing Images to Docker Hub
+
+Login:
+
+docker login
+
+Push:
+
+docker push username/app:latest
+
+Pipeline:
+
+sh 'docker push username/app:latest'
+
+Official Docker Hub:
+
+Docker Hub
+
+19. Publishing Images to GHCR
+
+GHCR = GitHub Container Registry.
+
+Push image:
+
+docker push ghcr.io/user/app:latest
+
+Official docs:
+
+GitHub Container Registry Docs
+
+20. Jenkins and GitHub Integration
+
+Connect Jenkins with GitHub.
+
+Flow:
+
+GitHub Push
+      ↓
+Webhook
+      ↓
+Jenkins Trigger
+      ↓
+Pipeline Run
+
+Benefits:
+
+Automatic builds
+Faster feedback
+21. Backup and Restore
+Backup
+
+Save:
+
+Jobs
+Plugins
+Credentials
+Jenkins configuration
+
+Important Folder:
+
+JENKINS_HOME
+
+Example:
+
+/var/lib/jenkins
+Restore
+
+Copy backup back to:
+
+JENKINS_HOME
+
+Restart Jenkins.
+
+Everything returns.
+
+22. Pipeline Best Practices
+
+✅ Store pipeline in Jenkinsfile
+
+✅ Use Git version control
+
+✅ Keep stages small
+
+✅ Use credentials securely
+
+✅ Use reusable pipeline libraries
+
+✅ Use agents for scaling
+
+❌ Never hardcode passwords
+
+❌ Avoid huge pipelines
+
+23. Jenkins and Maven
+Maven Installation
+Manage Jenkins
+    ↓
+Global Tool Configuration
+    ↓
+Maven
+
+Add Maven installation.
+
+Global Tool Configuration
+
+Used to configure:
+
+JDK
+Maven
+Git
+
+Example:
+
+JDK 21
+Maven 3.9
+Git
+Maven Build Pipeline
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
+            }
+        }
+    }
+}
+24. Code Coverage and Test Reports
+Run Tests
+mvn test
+Generate Coverage
+
+Common Tool:
+
+JaCoCo
+
+Report shows:
+
+Covered lines
+Missed lines
+Percentage coverage
+
+Example:
+
+Coverage = 85%
+25. Triggering Builds
+Poll SCM
+
+Jenkins checks Git periodically.
+
+pollSCM('* * * * *')
+
+Checks every minute.
+
+Webhook (Recommended)
+
+GitHub directly informs Jenkins.
+
+GitHub Push
+      ↓
+Webhook
+      ↓
+Jenkins Build
+
+Faster than polling.
+
+26. Pipeline Libraries
+
+Reusable pipeline code.
+
+Example:
+
+Instead of writing:
+
+Build
+Test
+Deploy
+
+in every project, create one shared library.
+
+Benefits:
+
+Reuse code
+Easy maintenance
+Standardization
+27. Jenkins Agents
+SSH Agent
+
+Connect through SSH.
+
+Master
+   ↓
+SSH
+   ↓
+Linux Agent
+SFTP Agent
+
+Used for file transfer.
+
+Jenkins
+   ↓
+SFTP
+   ↓
+Server
+Container-Based Agent
+
+Agent runs inside Docker.
+
+agent {
+    docker {
+        image 'maven:3.9'
+    }
+}
+
+Benefits:
+
+Portable
+Consistent
+Easy setup
+28. Deployments to Servers and Clouds
+
+After successful build:
+
+Build
+ ↓
+Test
+ ↓
+Package
+ ↓
+Deploy
+
+Deployment targets:
+
+Amazon Web Services (AWS EC2, ECS)
+Microsoft Azure
+Google Cloud
+VPS Servers
+Docker Containers
+Kubernetes Clusters
+Complete Jenkins CI/CD Flow
+Developer Pushes Code
+          ↓
+GitHub Repository
+          ↓
+Webhook Trigger
+          ↓
+Jenkins Pipeline Starts
+          ↓
+Checkout Code
+          ↓
+Maven Build
+          ↓
+Run Tests
+          ↓
+Generate Reports
+          ↓
+Build Docker Image
+          ↓
+Push to Docker Hub/GHCR
+          ↓
+Deploy to Server/Cloud
+          ↓
+Application Goes Live
