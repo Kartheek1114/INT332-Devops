@@ -1,0 +1,269 @@
+11. Using Caching for Faster Builds
+
+Installing dependencies repeatedly wastes time.
+
+Caching stores dependencies.
+
+Example:
+
+- uses: actions/cache@v4
+
+For Node.js:
+
+- uses: actions/cache@v4
+  with:
+    path: ~/.npm
+
+Benefits:
+
+Faster builds
+Lower execution time
+Reduced resource usage
+12. Multi-Job Workflows
+
+Multiple jobs can work together.
+
+Example:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+Flow:
+
+Build
+   ↓
+Test
+   ↓
+Deploy
+
+The test job starts only after build completes.
+
+13. Deploying with GitHub Actions
+
+After successful tests, applications can be deployed automatically.
+
+Deployment targets:
+
+VPS Servers
+AWS
+Azure
+Google Cloud
+Vercel
+Netlify
+Docker Containers
+
+Example:
+
+jobs:
+  deploy:
+
+Deployment occurs automatically after testing.
+
+14. GitHub-Hosted Runners
+
+GitHub provides managed virtual machines.
+
+Examples:
+
+runs-on: ubuntu-latest
+runs-on: windows-latest
+runs-on: macos-latest
+
+Advantages:
+
+No setup required
+Automatically maintained
+Secure
+Easy to use
+15. Self-Hosted Runners
+
+You provide your own machine.
+
+Supported:
+
+Windows
+Linux
+Mac
+
+Advantages:
+
+Full control
+More resources
+Access to internal systems
+
+Example:
+
+runs-on: self-hosted
+
+Use cases:
+
+Enterprise environments
+Private networks
+Specialized hardware
+16. Runner Security and Management
+
+Best Practices:
+
+Use Secrets
+
+Store passwords securely.
+
+Settings → Secrets and Variables
+
+Use:
+
+${{ secrets.DOCKER_PASSWORD }}
+Limit Permissions
+permissions:
+  contents: read
+Update Runners
+
+Keep self-hosted runners updated regularly.
+
+Restrict Access
+
+Only trusted workflows should run on self-hosted runners.
+
+17. Docker and GitHub Actions
+
+GitHub Actions can build Docker images automatically.
+
+Example:
+
+- name: Build Docker Image
+  run: docker build -t myapp .
+
+Every push automatically builds a Docker image.
+
+18. Pushing Docker Images to Docker Hub
+
+First store credentials as GitHub Secrets:
+
+DOCKER_USERNAME
+DOCKER_PASSWORD
+
+Login:
+
+- name: Login
+  uses: docker/login-action@v3
+
+Build and push:
+
+- name: Build and Push
+  uses: docker/build-push-action@v6
+
+Flow:
+
+Code Push
+     ↓
+Build Docker Image
+     ↓
+Push to Docker Hub
+
+Official Docker Hub:
+
+Docker Hub
+
+19. Pushing Images to GitHub Container Registry (GHCR)
+
+GHCR is GitHub's container registry.
+
+Official site:
+
+GitHub Container Registry Documentation
+
+Login:
+
+- uses: docker/login-action@v3
+
+Build:
+
+docker build .
+
+Push:
+
+docker push ghcr.io/username/app
+
+Benefits:
+
+Integrated with GitHub
+Secure authentication
+Version management
+20. Deployments to Cloud and Servers
+
+GitHub Actions can deploy applications automatically.
+
+AWS
+
+Use AWS credentials and deploy to:
+
+EC2
+ECS
+EKS
+Lambda
+
+Official AWS:
+
+Amazon Web Services
+
+Azure
+
+Deploy to:
+
+Azure App Service
+Azure Functions
+AKS
+
+Official Azure:
+
+Microsoft Azure
+
+Google Cloud
+
+Deploy to:
+
+Compute Engine
+Cloud Run
+GKE
+
+Official Google Cloud:
+
+Google Cloud
+
+Vercel
+
+Best for React, Next.js applications.
+
+Vercel
+
+Netlify
+
+Best for static websites.
+
+Netlify
+
+Complete CI/CD Flow
+Developer Pushes Code
+          ↓
+GitHub Repository
+          ↓
+GitHub Actions Triggered
+          ↓
+Install Dependencies
+          ↓
+Run Tests
+          ↓
+Build Application
+          ↓
+Build Docker Image
+          ↓
+Push Image to Docker Hub/GHCR
+          ↓
+Deploy to AWS/Azure/GCP/VPS
+          ↓
+Application Goes Live
