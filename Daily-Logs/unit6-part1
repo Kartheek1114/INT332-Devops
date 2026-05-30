@@ -1,0 +1,197 @@
+1. What is Jenkins?
+
+Jenkins is an open-source automation tool used for Continuous Integration (CI) and Continuous Deployment (CD).
+
+It automatically:
+
+Builds code
+Runs tests
+Creates packages
+Deploys applications
+Example Flow
+Developer Writes Code
+          ↓
+Push to GitHub
+          ↓
+Jenkins Detects Change
+          ↓
+Build Project
+          ↓
+Run Tests
+          ↓
+Deploy Application
+2. Jenkins Architecture (Master-Agent Model)
+
+Jenkins follows a Master-Agent Architecture.
+
+Master (Controller)
+
+The master manages:
+
+Web UI
+Job scheduling
+User management
+Plugin management
+Agent coordination
+Agent (Worker Node)
+
+Agents perform:
+
+Building projects
+Running tests
+Deployments
+Architecture
+          Jenkins Master
+                |
+     -----------------------
+     |          |         |
+  Agent 1    Agent 2   Agent 3
+ (Java)      (Node)    (Docker)
+
+This allows Jenkins to run multiple jobs simultaneously.
+
+3. Jenkins Installation and UI Overview
+Installation Steps
+Install Java
+Download Jenkins
+Start Jenkins service
+Open browser
+http://localhost:8080
+Main Dashboard
+
+Contains:
+
+New Item
+Build History
+Manage Jenkins
+Credentials
+Nodes (Agents)
+4. Plugin Management
+
+Plugins add new features to Jenkins.
+
+Popular Plugins
+Plugin	Purpose
+Git Plugin	Connect GitHub
+Docker Plugin	Docker integration
+Maven Plugin	Maven builds
+Pipeline Plugin	Pipeline support
+Blue Ocean	Better UI
+Install Plugin
+Manage Jenkins
+    ↓
+Plugins
+    ↓
+Available Plugins
+5. Security, Users and Roles
+Users
+
+Jenkins allows multiple users.
+
+Example:
+
+Admin
+Developer
+Tester
+Roles
+
+Permissions can be assigned.
+
+Example
+Role	Permission
+Admin	Full Access
+Developer	Build Jobs
+Tester	View Results
+Security Best Practices
+Enable login authentication
+Use strong passwords
+Use HTTPS
+Limit admin accounts
+6. Freestyle vs Pipeline Jobs
+Freestyle Job
+
+Traditional method.
+
+Configuration done through UI.
+
+Source Code
+↓
+Build
+↓
+Test
+↓
+Deploy
+Advantages
+Easy
+No coding required
+Disadvantages
+Hard to maintain
+Not version controlled
+Pipeline Job
+
+Pipeline is written as code.
+
+Stored in repository.
+
+Example:
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building'
+            }
+        }
+    }
+}
+Advantages
+Version control
+Reusable
+Easy automation
+7. Declarative Pipeline Syntax
+
+Most commonly used.
+
+Example:
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building Project'
+            }
+        }
+    }
+}
+Structure
+Pipeline
+  ↓
+Agent
+  ↓
+Stages
+  ↓
+Steps
+8. Scripted Pipeline Syntax
+
+More flexible.
+
+Example:
+
+node {
+    stage('Build') {
+        echo 'Building'
+    }
+
+    stage('Test') {
+        echo 'Testing'
+    }
+}
+Difference
+Declarative	Scripted
+Simple	Flexible
+Easier	More Coding
+Recommended	Advanced Usage
