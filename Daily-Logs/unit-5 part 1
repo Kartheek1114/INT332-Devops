@@ -1,0 +1,229 @@
+1. What is Continuous Integration (CI)?
+
+Continuous Integration (CI) is a software development practice where developers frequently merge their code changes into a shared repository. Every change is automatically tested and verified.
+
+Benefits
+Detect bugs early
+Improve code quality
+Automate testing
+Faster development
+Reduce manual work
+
+Example:
+
+Developer pushes code to GitHub.
+GitHub Actions automatically runs tests.
+If tests pass, code is approved.
+If tests fail, developers are notified.
+2. GitHub Actions
+
+GitHub Actions is GitHub's automation platform that allows you to build, test, and deploy applications directly from your GitHub repository.
+
+Common Uses:
+
+Run tests
+Build projects
+Deploy websites
+Build Docker images
+Send notifications
+3. Workflow Automation
+
+A workflow is an automated process defined in a YAML file.
+
+Example:
+
+name: Build Project
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run command
+        run: echo "Hello World"
+
+When code is pushed, GitHub automatically runs this workflow.
+
+4. Events and Triggers
+
+Workflows start when specific events occur.
+
+Push Event
+
+Triggered when code is pushed.
+
+on:
+  push:
+Pull Request Event
+
+Triggered when a pull request is opened or updated.
+
+on:
+  pull_request:
+Schedule Event
+
+Runs automatically at specified times.
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+Runs every day at midnight.
+
+Manual Workflow
+
+Triggered manually from GitHub.
+
+on:
+  workflow_dispatch:
+5. Workflow Directory Structure
+
+GitHub Actions workflows are stored inside:
+
+project/
+│
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+│
+└── source code
+
+GitHub automatically detects workflow files inside .github/workflows.
+
+6. Key Components of GitHub Actions
+Workflow
+
+A complete automation process.
+
+name: CI Pipeline
+Job
+
+A workflow contains one or more jobs.
+
+jobs:
+  build:
+
+Example:
+
+jobs:
+  build:
+  test:
+
+Build and test are separate jobs.
+
+Step
+
+A job consists of steps.
+
+steps:
+  - name: Install Dependencies
+    run: npm install
+Action
+
+Reusable automation units.
+
+Example:
+
+uses: actions/checkout@v4
+
+This action checks out repository code.
+
+Runner
+
+A machine that executes workflow jobs.
+
+Example:
+
+runs-on: ubuntu-latest
+
+GitHub provides the machine.
+
+7. Jobs and Matrix Strategies
+
+Matrix strategy allows testing on multiple configurations.
+
+Example:
+
+strategy:
+  matrix:
+    os: [ubuntu-latest, windows-latest]
+
+GitHub runs jobs on:
+
+Ubuntu
+Windows
+
+Example:
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        python-version: [3.9, 3.10, 3.11]
+
+Tests run for all Python versions.
+
+Benefits:
+
+Cross-platform testing
+Multiple language versions
+Better compatibility
+8. Steps and Shell Commands
+
+Commands can be executed directly.
+
+steps:
+  - name: List files
+    run: ls
+
+Multiple commands:
+
+run: |
+  npm install
+  npm test
+
+Windows example:
+
+run: dir
+9. Using Marketplace Actions
+
+GitHub provides a marketplace containing thousands of actions.
+
+Popular actions:
+
+Checkout code
+Setup Java
+Setup Node.js
+Upload artifacts
+Deploy applications
+
+Marketplace:
+
+GitHub Marketplace
+
+Example:
+
+- uses: actions/setup-node@v4
+10. Language-Specific Actions
+Java
+- uses: actions/setup-java@v4
+  with:
+    java-version: '21'
+Node.js
+- uses: actions/setup-node@v4
+  with:
+    node-version: '20'
+Python
+- uses: actions/setup-python@v5
+  with:
+    python-version: '3.11'
+PHP
+- uses: shivammathur/setup-php@v2
+  with:
+    php-version: '8.3'
+
+Useful for Laravel projects.
